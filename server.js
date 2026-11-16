@@ -1,93 +1,32 @@
 const express = require('express');
-const app = express();
-const port = process.env.PORT || 3000;
-const WebSocket = require('ws');
-const server = require('http').createServer(app);
-const wss = new WebSocket.Server({ server });
+const http = require('node:http');
+const path = require('node:path');
+const { WebSocketServer } = require('ws');
 
-wss.on('connection', function connection(ws) {
-  console.log('A new client connected!');
-  ws.send('Welcome new client!');
-
-  ws.on('message', function incoming(message) {
-    console.log('received: %s', message);
-  });
-
-  ws.on('close', () => console.log('Client has disconnected.'));
-});
-
-server.listen(port, function() {
-  console.log(`Server is listening on http://localhost:${port}`);
-});
-
-
-app.use(express.static('public')); 
-
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
-});
-app.get('/api/greet', (req, res) => {
-  res.send('Hello, World!');
-});
-
-const config = require('./dbConfig.json');
-const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
-
-app.get('/', (req, res) => {
-  res.send('Welcome to the StudyBuddy Service!');
-});
-
-const { MongoClient } = require('mongodb');
-
-const app = express();
-const port = process.env.PORT || 3000;
-
-const dbUsername = 'cs260';
-const dbPassword = 'cs260password';
-const dbName = 'Gonza055';
-const clusterUrl = 'gonza055.iginkev.mongodb.net';
-const mongoURI = `mongodb+srv://${dbUsername}:${encodeURIComponent(dbPassword)}@${clusterUrl}/${dbName}?retryWrites=true&w=majority`;
-
-const client = new MongoClient(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
-
-async function run() {
-  try {
-    await client.connect();
-    console.log("Connected correctly to server");
-
-    const database = client.db(dbName);
-    const collection = database.collection('cs260collection');
-
-    // Example: Insert a document
-    const insertResult = await collection.insertOne({ name: "John Doe", email: "john@example.com" });
-    console.log('Inserted document:', insertResult);
-
-    // Example: Find documents
-    const findResult = await collection.find({}).toArray();
-    console.log('Found documents:', findResult);
-
-    // Express routes would go here
-
-  } catch (err) {
-    console.log(err.stack);
-  } finally {
-    await client.close();
+// Educational demo only: account forms use browser-local mock data.
+// Serve a deliberate allowlist, never the repository or its configuration.
+function createServer() {
+  const app = express();
+  const pages = ['index.html', 'login.html', 'signup.html', 'forum.html',
+    'resources.html', 'matchmaking.html', 'styles.css', 'app.js', 'websocket.js'];
+  app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+  for (const page of pages) {
+    app.get('/' + page, (req, res) => res.sendFile(path.join(__dirname, page)));
   }
+  app.use('/website-images', express.static(path.join(__dirname, 'website-images')));
+  app.get('/api/greet', (req, res) => res.send('Hello, World!'));
+  const server = http.createServer(app);
+  const wss = new WebSocketServer({ server, path: '/ws', maxPayload: 4096 });
+  wss.on('connection', ws => {
+    ws.send('Connected to the StudyBuddy demo.');
+    ws.on('error', () => {});
+  });
+  return { server, wss };
 }
 
-run().catch(console.dir);
-
-app.use(express.static('public'));
-
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
-});
-
-app.get('/api/greet', (req, res) => {
-  res.send('Hello, World!');
-});
-
-app.get('/', (req, res) => {
-  res.send('Welcome to the StudyBuddy Service!');
-});
-
+if (require.main === module) {
+  const { server } = createServer();
+  const port = process.env.PORT || 3000;
+  server.listen(port, () => console.log(`StudyBuddy demo: http://localhost:${port}`));
+}
+module.exports = { createServer };

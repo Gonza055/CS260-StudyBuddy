@@ -1,109 +1,34 @@
-<<<<<<< HEAD
-# 📚 StudyBuddy: Revolutionize Your Study Sessions 📚
+# StudyBuddy
 
-Welcome to the StudyBuddy startup repository! We're dedicated to enhancing the college study experience by harnessing the power of community learning.
+A BYU CS 260 educational prototype exploring a study-collaboration interface with HTML/CSS/JavaScript, a small Express server, browser-local mock data and a WebSocket connection.
 
-In today's digital age, collaborative learning is just a click away, yet finding the right study partner can be a challenge. Enter "StudyBuddy" – your smart, intuitive study partner matchmaker! Whether you're looking to conquer calculus, ace anatomy, or delve deep into data science, StudyBuddy connects you with like-minded peers, curated study resources, and real-time academic forums, enhancing your learning experience.
+## Run
 
-# 🔑 Application Design & Layout:
-1. Instant Matchmaking - Input your subjects and available study times to find the perfect study partner or group.
-2. Subject-Based Forums - Have a question about a tricky topic? Ask away and let the community help.
-3. Study Resources - Share or access crowd-sourced notes, flashcards, and study guides.
-4. Scheduling - Easily schedule and manage your study sessions with an in-built calendar.
+Node.js 20 or newer:
 
-# 💻 Technologies Implemented
-StudyBuddy has begun integrating key technologies, with the following progress:
+```sh
+npm ci
+npm test
+npm start
+```
 
-### HTML
-- Established basic application structure with placeholders for future features.
+Open http://localhost:3000. No database credentials are needed for the demo.
 
-### CSS
-- Initial styling implemented, refinement pending.
+## Implemented versus planned
 
-### Authentication
-- Partial: Basic login and registration forms in place; secure authentication is in progress.
+| Implemented | Still a concept / placeholder |
+| --- | --- |
+| Static navigation and study pages | Real matchmaking and scheduling |
+| Simulated users in local storage | Shared persistent database |
+| WebSocket welcome message | Multi-user chat and presence |
+| Login/register interface | Secure account registration and authentication |
 
-Each technology is at a different stage of integration, with more advancements planned for the upcoming development sessions.
+Use sample values only. The forms do not authenticate users. The `studybuddy/` directory preserves an earlier React scaffold and is separate from the root demo.
 
-## Updates & Modifications (CSS Deliverable)
-In this phase, we undertook a design overhaul, introducing:
+## Engineering notes
 
-- **Ambient Backgrounds**: To make our pages visually appealing and context-rich, each page now boasts a theme-appropriate image.
-- **Enhanced Styling**: Elements like navigation bars, buttons, and forms have been stylized to provide an intuitive and engaging user experience.
-- **Responsive Design**: Adjusted layouts and elements to ensure seamless usage across various device sizes.
+`server.js` uses one HTTP listener shared with `/ws`. Static responses are allowlisted so source/configuration files are not exposed. Tests start an ephemeral local server and verify pages, excluded files and the WebSocket handshake.
 
-Visit our [GitHub Repository](https://github.com/Gonza055/startup) to see the code and contribute!
+Credential values were removed from the current source during maintenance. Any previously committed database credential must be rotated by the account owner; editing this version does not remove Git history. Do not reuse historical configuration.
 
-# 🎨 Design Mockups:
-
-Below you'll find the initial design sketches of our application:
-
-StudyBuddy HomePage
-![Homepage Sketch](Home_page.png)
-
-StudyBuddy Dashboard
-![Dashboard](Dashboard_Overview.png)
-
-To view more designs, check out the 'Images' folder in this repository.
-
-Thank you for visiting our repository. We welcome any contributions or feedback! Together, let's make studying collaborative and efficient.
-
-## Links
-
-- [Notes](notes.md)
-- [Images](images)
-=======
-# 📚 StudyBuddy: Revolutionize Your Study Sessions 📚
-
-Welcome to the StudyBuddy startup repository! We're dedicated to enhancing the college study experience by harnessing the power of community learning.
-
-In today's digital age, collaborative learning is just a click away, yet finding the right study partner can be a challenge. Enter "StudyBuddy" – your smart, intuitive study partner matchmaker! Whether you're looking to conquer calculus, ace anatomy, or delve deep into data science, StudyBuddy connects you with like-minded peers, curated study resources, and real-time academic forums, enhancing your learning experience.
-
-# 🔑 Application Design & Layout:
-1. Instant Matchmaking - Input your subjects and available study times to find the perfect study partner or group.
-2. Subject-Based Forums - Have a question about a tricky topic? Ask away and let the community help.
-3. Study Resources - Share or access crowd-sourced notes, flashcards, and study guides.
-4. Scheduling - Easily schedule and manage your study sessions with an in-built calendar.
-
-# 💻 Technologies Implemented
-StudyBuddy has begun integrating key technologies, with the following progress:
-
-### HTML
-- Established basic application structure with placeholders for future features.
-
-### CSS
-- Initial styling implemented, refinement pending.
-
-### Authentication
-- Partial: Basic login and registration forms in place; secure authentication is in progress.
-
-Each technology is at a different stage of integration, with more advancements planned for the upcoming development sessions.
-
-## Updates & Modifications (CSS Deliverable)
-In this phase, we undertook a design overhaul, introducing:
-
-- **Ambient Backgrounds**: To make our pages visually appealing and context-rich, each page now boasts a theme-appropriate image.
-- **Enhanced Styling**: Elements like navigation bars, buttons, and forms have been stylized to provide an intuitive and engaging user experience.
-- **Responsive Design**: Adjusted layouts and elements to ensure seamless usage across various device sizes.
-
-Visit our [GitHub Repository](https://github.com/Gonza055/startup) to see the code and contribute!
-
-# 🎨 Design Mockups:
-
-Below you'll find the initial design sketches of our application:
-
-StudyBuddy HomePage
-![Homepage Sketch](Home_page.png)
-
-StudyBuddy Dashboard
-![Dashboard](Dashboard_Overview.png)
-
-To view more designs, check out the 'Images' folder in this repository.
-
-Thank you for visiting our repository. We welcome any contributions or feedback! Together, let's make studying collaborative and efficient.
-
-## Links
-
-- [Notes](notes.md)
-- [Images](images)
->>>>>>> 570b7dd4eafa582c649d90c74a1a2d970de0da50
+[Portfolio](https://gonza055.github.io/)

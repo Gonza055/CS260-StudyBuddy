@@ -1,27 +1,15 @@
 {
-  "name": "startup",
+  "name": "studybuddy-demo",
   "version": "1.0.0",
-  "description": "Studybuddy",
-  "main": "app.js",
+  "private": true,
+  "description": "Educational study collaboration prototype",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node --test tests/*.test.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "StartupGonza055"
-  },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "mongodb": "^6.3.0",
-<<<<<<< HEAD
-    "mongoose": "^8.0.1",
     "ws": "^8.14.2"
-=======
-    "mongoose": "^8.0.1"
->>>>>>> 570b7dd4eafa582c649d90c74a1a2d970de0da50
-  },
-  "keywords": []
+  }
 }
